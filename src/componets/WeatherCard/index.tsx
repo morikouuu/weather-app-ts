@@ -1,3 +1,9 @@
 const WeatherCard = () => {
-	return;
+	return(
+    <div>
+    <h2>天気予報</h2>
+    </div>
+  )
 };
+
+export default WeatherCard;

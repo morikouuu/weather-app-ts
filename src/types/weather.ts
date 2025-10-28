@@ -30,4 +30,5 @@ export type WeatherError = {
 export type LocationData = {
 	lat: number;
 	lon: number;
+	error?: string;
 };
