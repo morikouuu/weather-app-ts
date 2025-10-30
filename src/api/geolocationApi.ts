@@ -23,7 +23,6 @@ export const getCurrentLocation = async (): Promise<LocationData> => {
 		};
 	} catch (error) {
 		console.error(error);
-
 		throw new Error("位置情報の所得に失敗しました");
 	}
 };
