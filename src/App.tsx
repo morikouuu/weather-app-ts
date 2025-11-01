@@ -1,17 +1,19 @@
 import { useState } from "react";
 import "./App.css";
 
-import WeatherCard from "./componets/WeatherCard";
+import { WeatherCard } from "./componets/WeatherCard";
 import type { LocationData, WeatherData } from "./types/weather";
 import { getCurrentLocation } from "./api/geolocationApi";
 import { fethcWeatherData } from "./api/weatherApi";
 function App() {
 	const [location, setLocation] = useState<LocationData | null>(null);
 	const [weather, setWeather] = useState<WeatherData | null>(null);
+	const [loading, setLoading] = useState(false);
 
 	const handleGetWeatherByLocation = async () => {
 		setWeather(null);
 		setLocation(null);
+		setLoading(true);
 		try {
 			const result = await getCurrentLocation();
 			setLocation(result);
@@ -21,21 +23,16 @@ function App() {
 			console.log(weather);
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setLoading(false);
 		}
 	};
 	return (
 		<>
-			<h1>天気予報アプリ</h1>
+			<h1>天気アプリ</h1>
 
 			<button onClick={handleGetWeatherByLocation}>天気を取得</button>
-			<WeatherCard />
-			{weather && (
-				<div>
-					<div>場所: {weather.name}</div>
-					<div>気温: {Math.round(weather.main.temp)}℃</div>
-					<div>天気: {weather.weather[0].description}</div>
-				</div>
-			)}
+			<WeatherCard weather={weather} loading={loading} />
 		</>
 	);
 }

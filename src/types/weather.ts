@@ -1,6 +1,5 @@
 // src/types/weather.ts
 export type WeatherData = {
-	name: string;
 	main: {
 		temp: number;
 		feels_like: number;
